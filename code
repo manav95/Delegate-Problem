@@ -1,0 +1,61 @@
+import itertools
+import time
+def countsomething(list3): 
+    countport=0
+    countspan=0
+    countfrench=0
+    countitalian=0
+    for elem in list3:
+                 if 'Portuguese' in elem[1]:
+                   countport=countport+1
+                 if 'Spanish' in elem[1]:
+                   countspan=countspan+1
+                 if 'Italian' in elem[1]:
+                     countitalian=countitalian+1
+                 if 'French' in elem[1]:
+                     countfrench=countfrench+1
+    if countport==3 and countspan>3 and countitalian==2 and countfrench==3:
+        return True
+def iterator(welfarecheck,orderings):
+    for tuple in orderings:
+     for tuple1 in welfarecheck:
+        list1=list(tuple)
+        list2=list(tuple1)
+        list3=[]
+        for i in range(len(list1)):
+          for x in range(len(list2)):
+             if int(list1[i])==len(list2[x]):
+              list3.append((list1[i],list2[x]))
+        if 'English' in list3[1][1] and 'Spanish' in list3[1][1]:
+         if 'English' in list3[2][1] and 'Spanish' in list3[2][1]:
+          if 'English' not in list3[3][1]:
+            if 'French' in list3[0][1] and 'French' in list3[1][1] and 'French' in list3[2][1]:
+             if 'Italian' in list3[2][1] and 'Italian' in list3[4][1]:
+               if countsomething(list3):
+                  return [('A',list3[0]),('B',list3[1]),('C',list3[2]),('D',list3[3]),('E',list3[4])]
+
+
+def instrument_fn(fn, *args):
+    c.starts, c.items = 0, 0
+    result = fn(*args)
+    print('%s got %s with %5d iters over %7d items'%(
+        fn.__name__, result, c.starts, c.items))                          
+def funct():
+    delegates=['A','B','C','D','E']
+    languages=['English','Spanish','French','Italian','Portuguese']
+    numtimes=['1','2','3','4','5']
+    orderings=itertools.permutations(numtimes,5)
+    fivelangcombo=itertools.combinations(languages,5)
+    fourlangcombo=itertools.combinations(languages,4)
+    threelangcombo=itertools.combinations(languages,3)
+    twolangcombo=itertools.combinations(languages,2)
+    onelangcombo=itertools.combinations(languages,1)
+    welfarecheck=itertools.product(fivelangcombo,fourlangcombo,threelangcombo,twolangcombo,onelangcombo)
+    return iterator(list(welfarecheck),list(orderings))
+
+print funct()                     
+
+
+
+
+
